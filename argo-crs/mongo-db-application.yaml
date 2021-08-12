@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grp-2-simple-mongo
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: grp-2-prod
+    server: https://kubernetes.default.svc
+  project: grp02
+  source:
+    path: ./storage
+    repoURL: https://github.com/cloud-native-garage-method-cohort/apac-3-grp-2-gitops
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

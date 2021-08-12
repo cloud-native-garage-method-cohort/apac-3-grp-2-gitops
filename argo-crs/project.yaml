@@ -1,0 +1,12 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: grp02
+  namespace: openshift-gitops
+spec:
+  description: group 2
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'

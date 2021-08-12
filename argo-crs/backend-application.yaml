@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grp-2-feedback-backend-service
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: grp-2-prod
+    server: https://kubernetes.default.svc
+  project: grp02
+  source:
+    helm:
+      version: v3
+      valueFiles:
+      - values.yaml
+      - ../../prod/feedback-backend-values.yaml
+    path: chart/cnb-feedback-backend-service
+    repoURL: https://github.com/cloud-native-garage-method-cohort/apac-3-grp-2-gitops
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
